@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>命名实体识别模块demo</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+<div class="alert alert-danger alert-dismissable">
+	<button type="button" class="close" data-dismiss="alert"
+			aria-hidden="true">
+		&times;
+	</button>
+	命名实体识别的一个简单demo！！！
+</div>
+
+            <form role="form" action="nerapi" method="post">
+
+                <label for="name">需要识别的句子：⬇️</label>
+                <input class="form-control" name="sentences"/>
+                <br>
+                <button type="submit" class="btn btn-primary">识别出实体</button>
+
+            </form>
+            <br><br>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        识别结果
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    {% set dict_en2cn = {'PER':'人名','LOC':'地点','ORG':'组织机构'} %}
+                    {% set font_bkcolor_dict =
+                    {'PER':'red','LOC':'blue','ORG':'green'} %}
+                    {% for k,v in result %}
+                        <span style="font-size:30px;color:{{ font_bkcolor_dict[k.split('-')[-1]] }}">{{ v }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        测试用例
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li>我国驻美大使李道豫5年来多次欣赏黄河艺术团的演出。</li>
+                        <li>我们不会忘记阿尔及利亚在中国恢复联合国合法席位和人权会反华提案问题上给予中国的宝贵支持。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <table class="table">
+                <caption>命名实体类别</caption>
+                <thead>
+                <tr>
+                    <th>类别</th>
+                    <th>颜色</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for k,v in font_bkcolor_dict.items() %}
+                    <tr>
+                        <td>{{ dict_en2cn[k] }}</td>
+                        <td bgcolor="{{ v }}"></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
