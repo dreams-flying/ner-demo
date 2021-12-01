@@ -1,6 +1,6 @@
 # ner-demo
 # 模型展示
-![image](https://github.com/dreams-flying/ner-demo/tree/master/images/images.png)
+![image](https://github.com/dreams-flying/ner-demo/blob/master/images/images.png)
 # 所需环境
 Python==3.6</br>
 tensorflow==1.14.0</br>
